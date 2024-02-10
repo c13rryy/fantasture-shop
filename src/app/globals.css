@@ -2,26 +2,158 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.scroll-fixed {
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(216, 216, 216, 0.534);
+  border-radius: 20px;
+}
+.sub-color {
+  fill: red;
+}
+
+.default-icon-color {
+  fill: none;
+}
+
+.height-animation {
+  transition: height 1000ms ease-in-out;
+}
+
+.modal-animation {
+  animation: slideRight 700ms ease-out forwards;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.product-amimation {
+  animation: modalAppearance 900ms ease-in forwards;
+}
+
+@keyframes modalAppearance {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.notification-animation {
+  animation: slideUp 400ms ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.toast-animation-down {
+  animation: slideDown 400ms ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.static-column {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.info-block {
+  grid-row: 1 / span 3;
+}
+
+.filter-swiper .swiper-wrapper .swiper-slide {
+  width: 200px !important;
+}
+
+.range-swiper .swiper-wrapper .swiper-slide {
+  width: auto !important;
+}
+
+.room-swiper .swiper-wrapper .swiper-slide {
+  width: auto !important;
+}
+
+.room-swiper .swiper-wrapper {
+  height: 582px !important;
+}
+
+@media (max-width: 1299px) {
+  .products > div:nth-child(1),
+  .products > div:nth-child(2) {
+    display: none;
+  }
+
+  .banner-card > div:nth-child(2n) {
+    justify-content: end;
+  }
+}
+
+@media (max-width: 1099px) {
+  .room-swiper .swiper-wrapper {
+    height: 420px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scroll-class {
+    overflow-y: scroll;
+  }
+
+  .scroll-class::-webkit-scrollbar {
+    background-color: transparent;
+  }
+}
+
+@media (max-width: 767px) {
+  .products > div:nth-child(2n) {
+    display: none;
+  }
+
+  .range-swiper .swiper-wrapper .swiper-slide {
+    width: 100% !important;
+  }
+
+  .room-swiper .swiper-wrapper {
+    height: 360px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-card > div:nth-child(2n) {
+    justify-content: start;
+  }
 }

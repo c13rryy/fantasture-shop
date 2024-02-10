@@ -1,20 +1,148 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config = {
+  darkMode: ["class"],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
+  prefix: "",
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
     },
+    extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
+    colors: {
+      black_1: "#070715",
+      black_2: "#20202D",
+      black_3: "#393944",
+      black_4: "#51515B",
+      brown_1: "#7F4E25B2",
+      brown_2: "#592900",
+      grey_1: "#6A6A73",
+      grey_2: "#83838A",
+      grey_3: "#9C9CA1",
+      grey_4: "#B5B5B9",
+      white_1: "#CDCDD0",
+      white_2: "#E6E6E8",
+      white_3: "#F3F3F3",
+      white_4: "#F8F8F8",
+      white: "#FFFFFF",
+      pr_purple: "#6D3EF1",
+      sec_purple: "#B69FF8",
+      pr_blue: "#292A94",
+      sec_blue: "#9494C9",
+      error: "#FF0000",
+      warning: "#C6A328",
+      success: "#58A61B",
+      shape_stroke_1_part_one: "#0C0C1E",
+      shape_stroke_1_part_two: "#221546",
+      shape_stroke_2_part_one: "#1F1F38",
+      shape_stroke_2_part_two: "#2F1E5E",
+      backdrop: "rgba(0, 0, 0, 0.56)",
+      customGray: "rgba(58, 58, 58, 0.72)",
+      backdrop_2: "rgba(255, 255, 255, 0.04)",
+      back_load: "rgba(7, 7, 15, 0.05)",
+      product_load: "rgba(180, 180, 180, 0.7)",
+    },
+
+    fontSize: {
+      16: "16px",
+      24: "24px",
+      56: "56px",
+      48: "48px",
+      20: "20px",
+      18: "18px",
+      14: "14px",
+      36: "36px",
+      12: "12px",
+    },
+
+    spacing: {
+      "56": "56px",
+      "34": "34px",
+      "17": "17px",
+      "120": "120px",
+      "22": "22px",
+      "48": "48px",
+      "27": "27px",
+      "40": "40px",
+      "30": "30px",
+      6: "6px",
+      "14": "14px",
+      "10": "10px",
+      "4": "4px",
+      "100": "100px",
+      "70": "70px",
+      "20": "20px",
+      "26": "26px",
+      "24": "24px",
+      "32": "32px",
+    },
+
+    gap: {
+      "0px": "0px",
+      "4px": "4px",
+      "6px": "6px",
+      "8px": "8px",
+      "10px": "10px",
+      "12px": "12px",
+      "16px": "16px",
+      "24px": "24px",
+      "32px": "32px",
+      "40px": "40px",
+      "56px": "56px",
+      "64px": "64px",
+      "75px": "75px",
+      "80px": "80px",
+      "96px": "96px",
+      "120px": "120px",
+    },
+
+    inset: {
+      "24px": "24px",
+      "43px": "43px",
+      "8px": "8px",
+      "0px": "0px",
+    },
+
+    screens: {
+      ls: "320px",
+      es: "380px",
+      xs: "500px",
+      mds: "600px",
+      sm: "768px",
+      xl: "1024px",
+      md: "1100px",
+      lg: "1300px",
+      "2xl": "1440px",
+      xh: "1600px",
+      "3xl": "1920px",
+      mobile: { max: "639px" },
+      tall: { raw: "(max-height: 657px)" },
+    },
   },
-  plugins: [],
-}
-export default config
+} satisfies Config;
+
+export default config;
