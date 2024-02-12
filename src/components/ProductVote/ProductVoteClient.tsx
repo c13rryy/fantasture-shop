@@ -101,6 +101,10 @@ const ProductVoteClient: FC<ProductVoteClientProps> = ({
       return quantityOfVote + 1;
     }
 
+    if (initialVote && typeof currentVote === "undefined") {
+      return quantityOfVote - 1;
+    }
+
     return quantityOfVote;
   }, [currentVote, initialVote, quantityOfVote]);
 

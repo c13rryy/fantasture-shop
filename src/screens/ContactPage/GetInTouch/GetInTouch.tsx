@@ -1,14 +1,11 @@
-import CartForm from "@/components/Forms/CartForm/CartForm";
+import ContactForm from "@/components/Forms/ContactForm/ContactForm";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import { Icon } from "@/components/ui/Icon/Icon";
 import Section from "@/components/ui/section/section";
 import Typo from "@/components/ui/typography/typo";
 import { CONTACTS } from "@/data/contacts";
-import { FC } from "react";
 
-interface GetInTouchProps {}
-
-const GetInTouch: FC<GetInTouchProps> = ({}) => {
+const GetInTouch = () => {
   return (
     <Section>
       <MaxWidthWrapper className="xh:w-full w-[95%]">
@@ -60,7 +57,7 @@ const GetInTouch: FC<GetInTouchProps> = ({}) => {
             ))}
           </div>
           <div className="xl:w-[530px] w-full">
-            <CartForm />
+            <ContactForm />
           </div>
         </div>
       </MaxWidthWrapper>

@@ -101,6 +101,7 @@ model Product {
   description     String
   fullDescription String?
   imageUrl        String
+  raiting         Float?
   price           String
   discount        String?
   subscribers     Subscription[]

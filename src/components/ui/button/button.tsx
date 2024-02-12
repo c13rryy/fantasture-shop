@@ -34,7 +34,7 @@ const Button = ({
   classes,
   disabled = false,
   useIcon = false,
-  iconName = "table",
+  iconName = "cart",
   children,
   isLoading,
   ...rest
