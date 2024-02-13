@@ -95,7 +95,8 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
                         onClick={() => {
                           if (
                             pathname.slice(1) === "cart" ||
-                            pathname.slice(1) === "contact"
+                            pathname.slice(1) === "contact" ||
+                            pathname.slice(1).includes("shop/")
                           ) {
                             setCartData(product);
                           }
