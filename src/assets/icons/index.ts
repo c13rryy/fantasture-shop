@@ -3,7 +3,6 @@ import Like from "./Like";
 import Logo from "./Logo";
 import Profile from "./Profile";
 import Search from "./Search";
-import Share from "./Share";
 import HeaderLike from "./HeaderLike";
 import Arrow from "./Arrow";
 import SwiperArrow from "./SwiperArrrow";
@@ -31,7 +30,6 @@ import NotFound from "./NotFound";
 import Settings from "./Settings";
 
 export const content = {
-  share: Share,
   like: Like,
   profile: Profile,
   headerLike: HeaderLike,

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Icon } from "../ui/Icon/Icon";
 import Button from "../ui/button/button";
 import { useContext, useMemo } from "react";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 import { Session } from "next-auth";
 import { CartContext } from "@/store/cart-store";
 

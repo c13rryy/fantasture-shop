@@ -2,7 +2,7 @@
 
 import CartProduct from "@/components/Cards/CartProduct/CartProduct";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
-import ProductQuantityButton from "@/components/ProductQuantityButton/ProductQuantityButton";
+import ProductQuantityButton from "@/components/ProductComponents/ProductQuantityButton/ProductQuantityButton";
 import Button from "@/components/ui/button/button";
 import Section from "@/components/ui/section/section";
 import Typo from "@/components/ui/typography/typo";

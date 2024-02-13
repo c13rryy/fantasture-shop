@@ -1,7 +1,7 @@
 import { Icon } from "@/components/ui/Icon/Icon";
 import SubscribeButton from "./SubscribeButton/SubscribeButton";
 import Link from "next/link";
-import CartButton from "@/components/CartButton/CartButton";
+import CartButton from "@/components/Cards/ProductItem/ProductItemHover/CartButton/CartButton";
 
 interface ProductItemHoverProps {
   productId: string;
@@ -13,15 +13,9 @@ const ProductItemHover = ({
   isSubscribed,
 }: ProductItemHoverProps) => {
   return (
-    <div className="absolute top-[0px] bg-customGray duration-1000 hover:opacity-[1] transition-opacity hover:duration-1000 hover:transition-opacity opacity-0  left-[0px] w-full h-full flex flex-col items-center justify-center gap-24px">
+    <div className="absolute top-[0px] bg-customGray duration-1000 hover:opacity-[1] transition-opacity hover:duration-1000 hover:transition-opacity opacity-0  left-[0px] w-full h-full flex flex-col items-center justify-center gap-[18px]">
       <CartButton productId={productId} />
-      <div className="flex gap-[20px] items-center">
-        <div className="cursor-pointer flex items-center gap-[2px]">
-          <Icon icon="share" size={16} viewBox="0 0 16 16" />
-          <span className="text-white text-16 font-semibold leading-6">
-            Share
-          </span>
-        </div>
+      <div className="pt-14">
         <SubscribeButton isSubscribed={isSubscribed} productId={productId} />
       </div>
       <Link

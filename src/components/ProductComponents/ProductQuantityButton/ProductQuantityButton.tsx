@@ -1,7 +1,7 @@
 import { CartContext } from "@/store/cart-store";
 import { ProductType } from "@/types";
 import { FC, useContext } from "react";
-import Typo from "../ui/typography/typo";
+import Typo from "../../ui/typography/typo";
 import { NotificationContext } from "@/store/notification-store";
 import classNames from "classnames";
 

@@ -3,7 +3,7 @@ import ProductItemHover from "./ProductItemHover/ProductItemHover";
 import { forwardRef } from "react";
 import { ProductType } from "@/types";
 import Typo from "@/components/ui/typography/typo";
-import ProductPrice from "@/components/ProductPrice/ProductPrice";
+import ProductPrice from "@/components/ProductComponents/ProductPrice/ProductPrice";
 import { Icon } from "@/components/ui/Icon/Icon";
 import ProductModal from "@/components/Modals/ProductModal/ProductModal";
 

@@ -1,13 +1,13 @@
 "use client";
 
 import MiniProduct from "@/components/Cards/MiniProduct/MiniProduct";
-import ProductQuantityButton from "@/components/ProductQuantityButton/ProductQuantityButton";
+import ProductQuantityButton from "@/components/ProductComponents/ProductQuantityButton/ProductQuantityButton";
 import { Icon } from "@/components/ui/Icon/Icon";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
 import Typo from "@/components/ui/typography/typo";
 import { calculateDiscountPrice, currencyFormatter } from "@/lib/utils";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 import { CartContext } from "@/store/cart-store";
 import { NotificationContext } from "@/store/notification-store";
 import Link from "next/link";

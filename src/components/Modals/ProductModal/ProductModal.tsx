@@ -1,12 +1,12 @@
 "use client";
 
-import ProductColors from "@/components/ColorSection/ProductColors/ProductColors";
+import ProductColors from "@/components/ProductComponents/ProductColors/ProductColors";
 import { Icon } from "@/components/ui/Icon/Icon";
 import Button from "@/components/ui/button/button";
 import Typo from "@/components/ui/typography/typo";
 import { disableScroll } from "@/helpers/disableScroll";
-import ProductSize from "@/screens/SingleProductPage/ProductInforamtion/ProductSize/ProductSize";
-import { ModalContext } from "@/store";
+import ProductSize from "@/components/ProductComponents/ProductSize/ProductSize";
+import { ModalContext } from "@/store/modal-store";
 import { CartContext } from "@/store/cart-store";
 import { NotificationContext } from "@/store/notification-store";
 import { ProductType } from "@/types";

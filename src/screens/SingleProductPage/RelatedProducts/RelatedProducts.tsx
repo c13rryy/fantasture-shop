@@ -1,4 +1,3 @@
-/* import ProductItem from "@/components/Cards/ProductItem/ProductItem"; */
 import ProductItem from "@/components/Cards/ProductItem/ProductItem";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import Button from "@/components/ui/button/button";
@@ -6,7 +5,6 @@ import Section from "@/components/ui/section/section";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { hasSubscription } from "@/lib/utils";
-/* import { RELATED } from "@/data/single-product"; */
 
 interface RelatedProductsProps {
   productId: string;
