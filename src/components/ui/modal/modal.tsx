@@ -29,8 +29,7 @@ const Modal = ({ children, isOpen, toggle }: ModalProps) => {
   }, [isOpen]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleKeyDown = (e: any) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
         toggle();
       }

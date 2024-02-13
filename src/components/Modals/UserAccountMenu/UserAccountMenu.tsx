@@ -7,6 +7,7 @@ import Typo from "@/components/ui/typography/typo";
 import { ModalContext } from "@/store";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FC, useContext } from "react";
 
 interface UserAccountMenuProps {
@@ -16,6 +17,8 @@ interface UserAccountMenuProps {
 const UserAccountMenu: FC<UserAccountMenuProps> = ({ user }) => {
   const { open, toggle } = useContext(ModalContext);
 
+  const router = useRouter();
+
   function closeModal() {
     toggle("accountModal");
   }
@@ -24,12 +27,22 @@ const UserAccountMenu: FC<UserAccountMenuProps> = ({ user }) => {
     <Modal toggle={closeModal} isOpen={open.accountModal}>
       <div className="flex relative flex-col gap-24px">
         <div className="flex justify-between items-center">
-          <UserAvatar
-            user={{
-              name: user.name || null,
-              image: user.image || null,
-            }}
-          />
+          <div className="flex items-center gap-10px">
+            <UserAvatar
+              user={{
+                name: user.name || null,
+                image: user.image || null,
+              }}
+            />
+            <button
+              onClick={() => {
+                router.push("/settings");
+                toggle("accountModal");
+              }}
+            >
+              <Icon icon="settings" size={24} />
+            </button>
+          </div>
           <button onClick={closeModal}>
             <Icon icon="close" size={24} />
           </button>

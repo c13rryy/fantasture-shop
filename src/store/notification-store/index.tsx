@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Children, ReactNode, createContext, useMemo, useState } from "react";
+import {
+  Children,
+  ReactNode,
+  createContext,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 
 interface NotifyProps {
   open: boolean;
@@ -35,10 +42,10 @@ export function NotificationContextProvider({
   });
 
   const toggle = (value: ActionType, open: boolean) => {
-    setNotification({
+    setNotification(() => ({
       open,
       action: value,
-    });
+    }));
   };
   const ctxValue = useMemo(
     () => ({

@@ -28,6 +28,11 @@ const RelatedProducts = async ({ productId }: RelatedProductsProps) => {
     include: {
       products: {
         take: 4,
+        where: {
+          NOT: {
+            id: productId,
+          },
+        },
         include: {
           subscribers: true,
           votes: true,
@@ -41,22 +46,10 @@ const RelatedProducts = async ({ productId }: RelatedProductsProps) => {
       <MaxWidthWrapper className="xh:w-full w-[95%]">
         <div className="grid lg:grid-cols-[285px,285px,285px,285px] xl:grid-cols-4 grid-cols-1 justify-center xl:gap-32px sm:gap-24px gap-16px sm:mt-48 mt-30">
           {relatedProducts?.products.map(product => {
-            const voteAmt = product.votes.reduce((acc, vote) => {
-              if (vote.type === "ACTIVE_ONE") return acc + 1;
-              if (vote.type === "ACTIVE_TWO") return acc + 2;
-              if (vote.type === "ACTIVE_THREE") return acc + 3;
-              if (vote.type === "ACTIVE_FOUR") return acc + 4;
-              if (vote.type === "ACTIVE_FIVE") return acc + 5;
-
-              return acc;
-            }, 0);
-
-            const amt =
-              product.votes.length > 0 ? voteAmt / product.votes.length : 0;
             return (
               <ProductItem
                 key={product.id}
-                voteAmt={amt}
+                voteAmt={product.raiting ?? 0}
                 discount={product.discount ?? ""}
                 cartItem={product}
                 title={product.name}

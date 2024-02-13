@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useContext, useEffect, useState } from "react";
@@ -15,14 +16,16 @@ const NotificationModal = () => {
   }, []);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      toggle(null, false);
-    }, 700);
+    if (notification.open) {
+      const timeout = setTimeout(() => {
+        toggle(null, false);
+      }, 700);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [toggle]);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [notification.open]);
 
   if (!notification.open) {
     return null;

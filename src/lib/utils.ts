@@ -85,3 +85,11 @@ export function formatTimeToNow(date: Date): string {
 export function calculateDiscountPrice(price: string, discount: string) {
   return (parseInt(price) * parseInt(discount)) / 100;
 }
+
+export const validateEmail = (email: unknown) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};

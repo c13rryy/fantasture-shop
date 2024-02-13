@@ -12,12 +12,6 @@ import Support from "./Support";
 import Guarantee from "./Guarantee";
 import Trophy from "./Trophy";
 import Shipping from "./Shipping";
-import Bed from "./Items/Bed";
-import Bollard from "./Items/Bollard";
-import Closet from "./Items/Closet";
-import Mirror from "./Items/Mirror";
-import Shelf from "./Items/Shelf";
-import Table from "./Items/Table";
 import Google from "./Google";
 import Phone from "./Phone";
 import Clock from "./Clock";
@@ -33,6 +27,8 @@ import Trash from "./Trash";
 import MessageSquare from "./MessageSquare";
 import CartLike from "./CartLike";
 import CartDislike from "./CartDislike";
+import NotFound from "./NotFound";
+import Settings from "./Settings";
 
 export const content = {
   share: Share,
@@ -49,12 +45,6 @@ export const content = {
   guarantee: Guarantee,
   trophy: Trophy,
   shipping: Shipping,
-  bed: Bed,
-  bollard: Bollard,
-  closet: Closet,
-  mirror: Mirror,
-  shelf: Shelf,
-  table: Table,
   google: Google,
   phone: Phone,
   clock: Clock,
@@ -70,6 +60,8 @@ export const content = {
   "message-square": MessageSquare,
   "cart-tick": CartLike,
   "cart-empty": CartDislike,
+  "not-found": NotFound,
+  settings: Settings,
 };
 
 export type IAvailableIcons = keyof typeof content;

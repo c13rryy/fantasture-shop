@@ -47,6 +47,36 @@ export async function PATCH(req: Request) {
           },
         });
 
+        const checkVotes = await db.product.findUnique({
+          where: {
+            id: productId,
+          },
+          include: {
+            votes: true,
+          },
+        });
+
+        if (checkVotes) {
+          const votesAmt = checkVotes.votes.reduce((acc, vote) => {
+            if (vote.type === "ACTIVE_ONE") return acc + 1;
+            if (vote.type === "ACTIVE_TWO") return acc + 2;
+            if (vote.type === "ACTIVE_THREE") return acc + 3;
+            if (vote.type === "ACTIVE_FOUR") return acc + 4;
+            if (vote.type === "ACTIVE_FIVE") return acc + 5;
+
+            return acc;
+          }, 0);
+
+          await db.product.update({
+            where: { id: productId },
+            data: {
+              raiting: parseFloat(
+                (votesAmt / checkVotes.votes.length).toFixed(1)
+              ),
+            },
+          });
+        }
+
         return new Response("OK");
       }
 
@@ -60,8 +90,73 @@ export async function PATCH(req: Request) {
       });
 
       //recount the votes for cache
+      const checkVotes = await db.product.findUnique({
+        where: {
+          id: productId,
+        },
+        include: {
+          votes: true,
+        },
+      });
 
-      const votesAmt = product.votes.reduce((acc, vote) => {
+      if (checkVotes) {
+        const votesAmt = checkVotes.votes.reduce((acc, vote) => {
+          if (vote.type === "ACTIVE_ONE") return acc + 1;
+          if (vote.type === "ACTIVE_TWO") return acc + 2;
+          if (vote.type === "ACTIVE_THREE") return acc + 3;
+          if (vote.type === "ACTIVE_FOUR") return acc + 4;
+          if (vote.type === "ACTIVE_FIVE") return acc + 5;
+
+          return acc;
+        }, 0);
+
+        await db.product.update({
+          where: { id: productId },
+          data: {
+            raiting: parseFloat(
+              (votesAmt / checkVotes.votes.length).toFixed(1)
+            ),
+          },
+        });
+        if (votesAmt / product.votes.length >= CACHE_AFTER_UPVOTES) {
+          const cachePayload: CachedProduct = {
+            name: product.name ?? "",
+            description: product.description ?? "",
+            fullDescription: product.fullDescription ?? "",
+            id: product.id ?? "",
+            imageUrl: product.imageUrl ?? "",
+            price: product.price ?? "",
+            discount: product.discount ?? "",
+            currentVote: voteType,
+            createdAt: product.createdAt,
+          };
+
+          await redis.hset(`post:${productId}`, cachePayload);
+        }
+      }
+
+      return new Response("ok");
+    }
+
+    await db.vote.create({
+      data: {
+        type: voteType,
+        userId: session.user.id,
+        productId,
+      },
+    });
+
+    const checkVotes = await db.product.findUnique({
+      where: {
+        id: productId,
+      },
+      include: {
+        votes: true,
+      },
+    });
+
+    if (checkVotes) {
+      const votesAmt = checkVotes.votes.reduce((acc, vote) => {
         if (vote.type === "ACTIVE_ONE") return acc + 1;
         if (vote.type === "ACTIVE_TWO") return acc + 2;
         if (vote.type === "ACTIVE_THREE") return acc + 3;
@@ -70,6 +165,13 @@ export async function PATCH(req: Request) {
 
         return acc;
       }, 0);
+
+      await db.product.update({
+        where: { id: productId },
+        data: {
+          raiting: parseFloat((votesAmt / checkVotes.votes.length).toFixed(1)),
+        },
+      });
 
       if (votesAmt / product.votes.length >= CACHE_AFTER_UPVOTES) {
         const cachePayload: CachedProduct = {
@@ -86,46 +188,9 @@ export async function PATCH(req: Request) {
 
         await redis.hset(`post:${productId}`, cachePayload);
       }
-
-      return new Response("ok");
-    }
-
-    await db.vote.create({
-      data: {
-        type: voteType,
-        userId: session.user.id,
-        productId,
-      },
-    });
-
-    const votesAmt = product.votes.reduce((acc, vote) => {
-      if (vote.type === "ACTIVE_ONE") return acc + 1;
-      if (vote.type === "ACTIVE_TWO") return acc + 2;
-      if (vote.type === "ACTIVE_THREE") return acc + 3;
-      if (vote.type === "ACTIVE_FOUR") return acc + 4;
-      if (vote.type === "ACTIVE_FIVE") return acc + 5;
-
-      return acc;
-    }, 0);
-
-    if (votesAmt / product.votes.length >= CACHE_AFTER_UPVOTES) {
-      const cachePayload: CachedProduct = {
-        name: product.name ?? "",
-        description: product.description ?? "",
-        fullDescription: product.fullDescription ?? "",
-        id: product.id ?? "",
-        imageUrl: product.imageUrl ?? "",
-        price: product.price ?? "",
-        discount: product.discount ?? "",
-        currentVote: voteType,
-        createdAt: product.createdAt,
-      };
-
-      await redis.hset(`post:${productId}`, cachePayload);
     }
     return new Response("ok");
   } catch (error) {
-    console.log(error);
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 400 });
     }

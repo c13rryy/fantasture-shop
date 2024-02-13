@@ -26,6 +26,24 @@
   transition: height 1000ms ease-in-out;
 }
 
+.error-animation {
+  animation: errorChange 1400ms ease-out forwards;
+}
+
+@keyframes errorChange {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .modal-animation {
   animation: slideRight 700ms ease-out forwards;
 }

@@ -33,20 +33,30 @@ const CartInfo = () => {
   );
 
   const averageDiscount = useMemo(() => {
-    const discount = items.reduce(
-      (value, carItem) =>
-        value + parseInt(carItem.discount ? carItem.discount : "0"),
+    const defaultPrice = items.reduce(
+      (value, cartItem) =>
+        value + parseInt(cartItem.price) * (cartItem.quantity ?? 1),
       0
     );
 
-    if (discount !== 0) {
-      const productWithDiscount = items.filter(el => el.discount);
+    const discountPrice = items.reduce((value, cartItem) => {
+      if (cartItem.discount) {
+        return (
+          value +
+          calculateDiscountPrice(cartItem.price, cartItem.discount) *
+            (cartItem.quantity ?? 1)
+        );
+      }
+      return value + parseInt(cartItem.price) * (cartItem.quantity ?? 1);
+    }, 0);
 
-      return discount / productWithDiscount.length;
+    if (discountPrice === defaultPrice) {
+      return 0;
     }
 
-    return 0;
+    return Math.round((discountPrice * 100) / defaultPrice);
   }, [items]);
+
   return (
     <Section>
       <MaxWidthWrapper
@@ -113,11 +123,7 @@ const CartInfo = () => {
                 <Typo tag="h4" text="Discount" color="grey_3" />
                 <Typo
                   type="sectionP"
-                  text={
-                    averageDiscount > 0
-                      ? `${averageDiscount}%`
-                      : averageDiscount
-                  }
+                  text={averageDiscount > 0 ? `${averageDiscount}%` : 0}
                   color="grey_3"
                 />
               </div>

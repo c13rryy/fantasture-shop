@@ -24,7 +24,7 @@ const Input = ({
 }: InputTypes) => {
   return (
     <>
-      <div className={`${classes} flex flex-col gap-[22px]`}>
+      <div className={`${classes} flex flex-col sm:gap-[22px] gap-16px`}>
         <label className="font-medium text-16 text-black_1" htmlFor={name}>
           {label}
         </label>

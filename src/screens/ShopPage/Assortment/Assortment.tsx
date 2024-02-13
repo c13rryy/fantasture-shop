@@ -4,6 +4,7 @@ import ProductItem from "@/components/Cards/ProductItem/ProductItem";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import FilterSlider from "@/components/Sliders/FilterSlider/FilterSlider";
 import { Icon } from "@/components/ui/Icon/Icon";
+import Button from "@/components/ui/button/button";
 import Section from "@/components/ui/section/section";
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/constants";
 import { hasSubscription } from "@/lib/utils";
@@ -30,6 +31,7 @@ const Assortment = ({
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const router = useRouter();
   const [page, setPage] = useState(1);
+  const [filterPage, setFilterPage] = useState(1);
   const lastPostRef = useRef<HTMLDivElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -46,9 +48,13 @@ const Assortment = ({
         return null;
       }
       const { data } = await axios.get(
-        `/api/products/filter?id=${activeCategory}`
+        `/api/products/filter?id=${activeCategory}&limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${filterPage}`
       );
-      return data as FilterData;
+      return data as {
+        filterData: FilterData;
+        hasMore: boolean;
+        quantityOfPage: number;
+      };
     },
     queryKey: ["filter-query"],
     enabled: false,
@@ -89,10 +95,12 @@ const Assortment = ({
   useEffect(() => {
     if (activeCategory) {
       refetch();
+    } else if (filterPage > 1) {
+      refetch();
     } else {
       refetch();
     }
-  }, [activeCategory]);
+  }, [activeCategory, filterPage]);
 
   const pagesQuantity = useMemo(
     () => data.pages.flatMap(page => page.quantityOfPage),
@@ -106,8 +114,8 @@ const Assortment = ({
   }, [entry, fetchNextPage, pagesQuantity, activeCategory, page]);
 
   const productData = useMemo(() => {
-    if (categoryData?.products) {
-      return categoryData.products;
+    if (categoryData?.filterData.products) {
+      return categoryData.filterData.products;
     }
 
     if (data) {
@@ -115,7 +123,7 @@ const Assortment = ({
     }
 
     return initialProducts;
-  }, [categoryData?.products, data, initialProducts]);
+  }, [categoryData?.filterData.products, data, initialProducts]);
 
   return (
     <Section>
@@ -123,7 +131,7 @@ const Assortment = ({
         <FilterSlider filterFn={handleFilter} categories={categories} />
         <div className="grid relative lg:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-32px sm:gap-24px gap-16px sm:mt-40 mt-24">
           {productData.map((product, idx) => {
-            const voteAmt = product.votes.reduce((acc, vote) => {
+            /*  const voteAmt = product.votes.reduce((acc, vote) => {
               if (vote.type === "ACTIVE_ONE") return acc + 1;
               if (vote.type === "ACTIVE_TWO") return acc + 2;
               if (vote.type === "ACTIVE_THREE") return acc + 3;
@@ -135,14 +143,14 @@ const Assortment = ({
 
             const amt =
               product.votes.length > 0 ? voteAmt / product.votes.length : 0;
-
+ */
             if (idx === productData.length - 1) {
               return (
                 <ProductItem
                   cartItem={product}
                   ref={ref}
                   key={product.id}
-                  voteAmt={amt}
+                  voteAmt={product.raiting ?? 0}
                   title={product.name}
                   description={product.description}
                   price={product.price}
@@ -161,7 +169,7 @@ const Assortment = ({
                 <ProductItem
                   key={product.id}
                   cartItem={product}
-                  voteAmt={amt}
+                  voteAmt={product.raiting ?? 0}
                   productId={product.id}
                   title={product.name}
                   description={product.description}
@@ -193,6 +201,28 @@ const Assortment = ({
             <div className="animate-spin">
               <Icon icon="loader" size={48} viewBox="0 0 24 24" />
             </div>
+          </div>
+        )}
+
+        {(categoryData?.quantityOfPage ?? 1) > 1 && (
+          <div className="flex gap-10px items-center justify-center mt-20">
+            <Button
+              onClick={() => setFilterPage(old => Math.max(old - 1, 1))}
+              disabled={filterPage === 1}
+              size="subscribe"
+            >
+              Previous Page
+            </Button>
+            <Button
+              disabled={filterPage === categoryData?.quantityOfPage}
+              onClick={() =>
+                setFilterPage(old => (categoryData?.hasMore ? old + 1 : old))
+              }
+              size="subscribe"
+              classes="disabled:bg-grey_1 disabled:border-grey_1 disabled:text-white"
+            >
+              Next Page
+            </Button>
           </div>
         )}
       </MaxWidthWrapper>

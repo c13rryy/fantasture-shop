@@ -41,6 +41,15 @@ const FilterSlider = ({ categories, filterFn }: FilterSliderProps) => {
             />
           </SwiperSlide>
         ))}
+        <SwiperSlide>
+          <FilterButton
+            onClick={() => {
+              handleClick("raiting");
+            }}
+            title="Raiting"
+            isActive={activeButton === "raiting"}
+          />
+        </SwiperSlide>
       </Swiper>
     </div>
   );
