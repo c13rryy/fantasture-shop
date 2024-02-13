@@ -1,6 +1,6 @@
 "use client";
 
-import { ModalContextProvider } from "@/store";
+import { ModalContextProvider } from "@/store/modal-store";
 import { CartContextProvider } from "@/store/cart-store";
 import { NotificationContextProvider } from "@/store/notification-store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

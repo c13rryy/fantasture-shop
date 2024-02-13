@@ -40,9 +40,9 @@ const Products = async ({ data }: ProductsProps) => {
           })}
         </div>
         <div className="sm:mt-34 mt-26 flex justify-center">
-          <Button size="large">
-            <Link href="/shop">Show More</Link>
-          </Button>
+          <Link href="/shop">
+            <Button size="large">Show More</Button>
+          </Link>
         </div>
       </MaxWidthWrapper>
     </Section>

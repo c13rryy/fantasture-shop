@@ -1,5 +1,5 @@
 import ActiveProjectPath from "./ActiveProjectPath/ActiveProjectPath";
-import ProductDetails from "@/components/ProductDetails/ProductDetails";
+import ProductDetails from "@/components/ProductComponents/ProductDetails/ProductDetails";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import { redis } from "@/lib/redis";
 import { CachedProduct } from "@/types/redis";

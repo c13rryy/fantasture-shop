@@ -3,7 +3,7 @@
 import MiniProduct from "@/components/Cards/MiniProduct/MiniProduct";
 import Modal from "@/components/ui/modal/modal";
 import Typo from "@/components/ui/typography/typo";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 import { FC, startTransition, useContext, useState } from "react";
 import { Product } from "@prisma/client";
 import { Icon } from "@/components/ui/Icon/Icon";
@@ -76,6 +76,7 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
                       title={product.name}
                       description={product.description}
                       price={product.price}
+                      discount={product.discount ?? ""}
                     />
                     <div className="flex flex-col-reverse gap-8px pr-4">
                       <button
@@ -94,7 +95,8 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
                         onClick={() => {
                           if (
                             pathname.slice(1) === "cart" ||
-                            pathname.slice(1) === "contact"
+                            pathname.slice(1) === "contact" ||
+                            pathname.slice(1).includes("shop/")
                           ) {
                             setCartData(product);
                           }

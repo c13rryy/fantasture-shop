@@ -4,7 +4,7 @@ import Link from "next/link";
 import HeaderActions from "./HeaderActions";
 import { Session } from "next-auth";
 import { useContext, useEffect } from "react";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 
 interface HeaderMenuProps {
   isOpen: boolean;

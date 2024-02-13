@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import Input from "@/components/ui/input/input";
 import Modal from "@/components/ui/modal/modal";
 import Typo from "@/components/ui/typography/typo";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 import { Prisma, Product } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";

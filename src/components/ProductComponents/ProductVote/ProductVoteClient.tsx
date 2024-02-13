@@ -4,8 +4,8 @@ import { votes } from "@/data/vote-data";
 import { usePrevious } from "@mantine/hooks";
 import { VoteType } from "@prisma/client";
 import { FC, useEffect, useMemo, useState } from "react";
-import { Icon } from "../ui/Icon/Icon";
-import Typo from "../ui/typography/typo";
+import { Icon } from "../../ui/Icon/Icon";
+import Typo from "../../ui/typography/typo";
 import { useMutation } from "@tanstack/react-query";
 import { ProductVoteRequest } from "@/lib/validators/votes";
 import axios, { AxiosError } from "axios";
@@ -109,14 +109,14 @@ const ProductVoteClient: FC<ProductVoteClientProps> = ({
   }, [currentVote, initialVote, quantityOfVote]);
 
   const amount = useMemo((): number => {
-    if (quantityOfVote === 0) {
+    if (quantityOfVote === 0 || !currentVote) {
       return votesAmt;
     }
 
     const result = votesAmt / quantityOfVoteChek;
 
     return parseFloat(result.toFixed(1));
-  }, [quantityOfVote, quantityOfVoteChek, votesAmt]);
+  }, [currentVote, quantityOfVote, quantityOfVoteChek, votesAmt]);
 
   return (
     <div className="flex items-center gap-16px">
