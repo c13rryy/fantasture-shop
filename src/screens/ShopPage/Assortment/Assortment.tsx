@@ -100,7 +100,7 @@ const Assortment = ({
     } else {
       refetch();
     }
-  }, [activeCategory, filterPage]);
+  }, [activeCategory, filterPage, refetch]);
 
   const pagesQuantity = useMemo(
     () => data.pages.flatMap(page => page.quantityOfPage),
