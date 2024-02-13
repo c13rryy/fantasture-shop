@@ -109,8 +109,12 @@ const ProductVoteClient: FC<ProductVoteClientProps> = ({
   }, [currentVote, initialVote, quantityOfVote]);
 
   const amount = useMemo((): number => {
-    if (quantityOfVote === 0 || !currentVote) {
+    if (quantityOfVote === 0 && !currentVote) {
       return votesAmt;
+    }
+
+    if (quantityOfVote === 1 && !currentVote) {
+      return 0;
     }
 
     const result = votesAmt / quantityOfVoteChek;
