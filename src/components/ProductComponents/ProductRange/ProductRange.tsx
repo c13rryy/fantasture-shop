@@ -1,4 +1,4 @@
-import Typo from "../ui/typography/typo";
+import Typo from "../../ui/typography/typo";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 

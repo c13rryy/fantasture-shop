@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon/Icon";
 import Button from "@/components/ui/button/button";
 import Modal from "@/components/ui/modal/modal";
 import Typo from "@/components/ui/typography/typo";
-import { ModalContext } from "@/store";
+import { ModalContext } from "@/store/modal-store";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";

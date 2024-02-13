@@ -131,19 +131,6 @@ const Assortment = ({
         <FilterSlider filterFn={handleFilter} categories={categories} />
         <div className="grid relative lg:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-32px sm:gap-24px gap-16px sm:mt-40 mt-24">
           {productData.map((product, idx) => {
-            /*  const voteAmt = product.votes.reduce((acc, vote) => {
-              if (vote.type === "ACTIVE_ONE") return acc + 1;
-              if (vote.type === "ACTIVE_TWO") return acc + 2;
-              if (vote.type === "ACTIVE_THREE") return acc + 3;
-              if (vote.type === "ACTIVE_FOUR") return acc + 4;
-              if (vote.type === "ACTIVE_FIVE") return acc + 5;
-
-              return acc;
-            }, 0);
-
-            const amt =
-              product.votes.length > 0 ? voteAmt / product.votes.length : 0;
- */
             if (idx === productData.length - 1) {
               return (
                 <ProductItem
@@ -214,7 +201,9 @@ const Assortment = ({
               Previous Page
             </Button>
             <Button
-              disabled={filterPage === categoryData?.quantityOfPage}
+              disabled={
+                filterPage === Math.round(categoryData?.quantityOfPage ?? 1)
+              }
               onClick={() =>
                 setFilterPage(old => (categoryData?.hasMore ? old + 1 : old))
               }

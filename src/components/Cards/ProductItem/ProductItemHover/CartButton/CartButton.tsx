@@ -1,8 +1,8 @@
 "use client";
 
 import { FC, useContext, useMemo } from "react";
-import Button from "../ui/button/button";
-import { ModalContext } from "@/store";
+import Button from "../../../../ui/button/button";
+import { ModalContext } from "@/store/modal-store";
 import { CartContext } from "@/store/cart-store";
 
 interface CartButtonProps {

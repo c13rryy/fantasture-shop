@@ -1,4 +1,4 @@
-import ProductPrice from "@/components/ProductPrice/ProductPrice";
+import ProductPrice from "@/components/ProductComponents/ProductPrice/ProductPrice";
 import Typo from "@/components/ui/typography/typo";
 import Image, { StaticImageData } from "next/image";
 import { FC } from "react";

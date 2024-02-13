@@ -1,15 +1,12 @@
 import Image from "next/image";
-import Typo from "../ui/typography/typo";
+import Typo from "../../ui/typography/typo";
 import { Suspense } from "react";
 import ProductVoteServer from "../ProductVote/ProductVoteServer";
-import { Icon } from "../ui/Icon/Icon";
+import { Icon } from "../../ui/Icon/Icon";
 import { db } from "@/lib/db";
-import CommentSection from "../CommentSection/CommentSection";
-/* import ProductCartButton from "../CartButtons/ProductCartButton/ProductCartButton"; */
+import CommentSection from "../../CommentSection/CommentSection";
 import ProductPrice from "../ProductPrice/ProductPrice";
-/* import ColorSection from "../ColorSection/ColorSection";
-import SizeSection from "../SizeSection/SizeSection"; */
-import CharacteristicSection from "../CharacteristicSection/CharacteristicSection";
+import CharacteristicSection from "../../CharacteristicSection/CharacteristicSection";
 
 interface ProductDetailsProps {
   productId: string;
@@ -73,24 +70,6 @@ const ProductDetails = ({
             className="text-[13px] font-normal leading-normal"
             text={fullDescription ?? description}
           />
-
-          {/*  <Suspense fallback={<ProductVoteShell />}>
-            <SizeSection productId={productId} />
-          </Suspense>
-
-          <Suspense fallback={<ProductVoteShell />}>
-            <ColorSection productId={productId} />
-          </Suspense> */}
-          {/*  <ProductCartButton
-            item={{
-              price,
-              name,
-              imageUrl,
-              id: productId,
-              description,
-              discount: discount ?? "",
-            }}
-          /> */}
           <Suspense
             fallback={
               <div className="flex justify-center items-center h-full">

@@ -1,6 +1,6 @@
 "use client";
 
-import ProductRange from "@/components/ProductRange/ProductRange";
+import ProductRange from "@/components/ProductComponents/ProductRange/ProductRange";
 import { PRODUCT_TYPE } from "@/data/main-page";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
