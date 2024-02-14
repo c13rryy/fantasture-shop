@@ -42,7 +42,7 @@ const HeaderMenu = ({ isOpen, closeMenu, session }: HeaderMenuProps) => {
       </ul>
 
       <div className="mb-56">
-        <HeaderActions session={session} />
+        <HeaderActions closeMenu={closeMenu} session={session} />
       </div>
     </nav>
   );

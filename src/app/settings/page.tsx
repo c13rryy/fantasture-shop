@@ -2,9 +2,10 @@ import UserNameForm from "@/components/Forms/UserNameForm/UserNameForm";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import Typo from "@/components/ui/typography/typo";
 import { authOptions, getAuthSession } from "@/lib/auth";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Settings",
   description: "Manage account and website settings.",
 };

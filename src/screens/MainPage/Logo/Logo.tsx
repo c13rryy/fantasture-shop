@@ -2,6 +2,7 @@ import Background from "@/components/Background/Background";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import Button from "@/components/ui/button/button";
 import Typo from "@/components/ui/typography/typo";
+import Link from "next/link";
 import bg from "public/bg-main.jpg";
 
 const Logo = () => {
@@ -17,9 +18,11 @@ const Logo = () => {
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis."
             color="[#333]"
           />
-          <Button classes="uppercase sm:w-fit w-full" size="large">
-            BUY Now
-          </Button>
+          <Link href="/shop">
+            <Button classes="uppercase sm:w-fit w-full" size="large">
+              BUY Now
+            </Button>
+          </Link>
         </div>
       </MaxWidthWrapper>
     </section>

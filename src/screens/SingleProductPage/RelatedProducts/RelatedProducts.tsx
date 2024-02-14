@@ -5,6 +5,7 @@ import Section from "@/components/ui/section/section";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { hasSubscription } from "@/lib/utils";
+import Link from "next/link";
 
 interface RelatedProductsProps {
   productId: string;
@@ -66,7 +67,9 @@ const RelatedProducts = async ({ productId }: RelatedProductsProps) => {
         </div>
 
         <div className="sm:mt-34 mt-26 flex justify-center">
-          <Button size="large">Show More</Button>
+          <Link href="/shop">
+            <Button size="large">Show More</Button>
+          </Link>
         </div>
       </MaxWidthWrapper>
     </Section>

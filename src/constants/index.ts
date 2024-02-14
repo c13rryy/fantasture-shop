@@ -1,1 +1,2 @@
 export const INFINITE_SCROLL_PAGINATION_RESULTS = 8;
+export const PAGE_SIZE = 6;

@@ -1,8 +1,22 @@
+"use client";
+
 import Button from "@/components/ui/button/button";
+import { FormEvent, useRef } from "react";
+import toast from "react-hot-toast";
 
 const FooterForm = () => {
+  const ref = useRef<HTMLFormElement>(null);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    toast.success("Successfully subscribed");
+    ref.current?.reset();
+  };
   return (
-    <form className="flex xl:items-center items-end xl:flex-row flex-col gap-12px">
+    <form
+      ref={ref}
+      className="flex xl:items-center items-end xl:flex-row flex-col gap-12px"
+      onSubmit={handleSubmit}
+    >
       <div className="w-full">
         <input
           placeholder="Enter Your Email Address"
@@ -13,7 +27,9 @@ const FooterForm = () => {
         />
       </div>
 
-      <Button size="subscribe">SUBSCRIBE</Button>
+      <Button type="submit" size="subscribe">
+        SUBSCRIBE
+      </Button>
     </form>
   );
 };

@@ -45,7 +45,7 @@
 }
 
 .modal-animation {
-  animation: slideRight 700ms ease-out forwards;
+  animation: slideRight 1000ms ease-out forwards;
 }
 
 @keyframes slideRight {

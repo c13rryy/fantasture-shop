@@ -22,7 +22,7 @@ export default async function Home() {
     <>
       <Logo />
       <ProductsRange />
-      {<Products data={products} />}
+      <Products data={products} />
       <RoomsInspiration />
     </>
   );

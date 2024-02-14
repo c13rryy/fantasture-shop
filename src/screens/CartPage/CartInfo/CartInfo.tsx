@@ -11,11 +11,13 @@ import { CartContext } from "@/store/cart-store";
 import { NotificationContext } from "@/store/notification-store";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useMemo } from "react";
 
 const CartInfo = () => {
   const { items, clearCart } = useContext(CartContext);
   const { toggle } = useContext(NotificationContext);
+  const router = useRouter();
 
   const cartTotal = useMemo(
     () =>
@@ -127,7 +129,11 @@ const CartInfo = () => {
                   color="grey_3"
                 />
               </div>
-              <Button classes="w-full" size="large">
+              <Button
+                onClick={() => router.push("/")}
+                classes="w-full"
+                size="large"
+              >
                 Checkout
               </Button>
             </div>

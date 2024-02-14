@@ -1,54 +1,29 @@
 "use client";
 
-import FilterButton from "@/components/FilterButton/FilterButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import sliderParams from "./swiper-settings/config";
 import { Category } from "@prisma/client";
-import { useState } from "react";
+import FilterButton from "@/components/FilterButton/FilterButton";
 
 interface FilterSliderProps {
   categories: Category[];
-  filterFn: (id: string | null) => void;
 }
 
-const FilterSlider = ({ categories, filterFn }: FilterSliderProps) => {
-  const [activeButton, setActiveButton] = useState<string | null>(null);
-  function handleClick(id: string | null) {
-    filterFn(id);
-    setActiveButton(id);
-  }
+const FilterSlider = ({ categories }: FilterSliderProps) => {
   return (
     <div>
       <Swiper {...sliderParams} className="filter-swiper">
         <SwiperSlide>
-          <FilterButton
-            onClick={() => {
-              handleClick(null);
-            }}
-            title="All products"
-            isActive={activeButton === null}
-          />
+          <FilterButton href="/shop" categoryName="All products" />
         </SwiperSlide>
         {categories.map(category => (
           <SwiperSlide key={category.id}>
-            <FilterButton
-              onClick={() => {
-                handleClick(category.id);
-              }}
-              title={category.name}
-              isActive={activeButton === category.id}
-            />
+            <FilterButton key={category.id} categoryName={category.name} />
           </SwiperSlide>
         ))}
         <SwiperSlide>
-          <FilterButton
-            onClick={() => {
-              handleClick("raiting");
-            }}
-            title="Raiting"
-            isActive={activeButton === "raiting"}
-          />
+          <FilterButton categoryName="Raiting" />
         </SwiperSlide>
       </Swiper>
     </div>

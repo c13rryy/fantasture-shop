@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
-import { FC, startTransition, useState } from "react";
+import { FC, startTransition, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 interface SubscribeButtonProps {
@@ -55,6 +55,10 @@ const SubscribeButton: FC<SubscribeButtonProps> = ({
       return toast.success("You successfully subscribed to product");
     },
   });
+
+  useEffect(() => {
+    setIsActive(isSubscribed);
+  }, [isSubscribed]);
 
   function handleClick() {
     if (typeof isSubscribed === "boolean") {

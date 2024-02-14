@@ -20,7 +20,6 @@ interface HeaderProp {
 const Header = ({ session }: HeaderProp) => {
   const [open, setIsOpen] = useState(false);
   const [show, setShow] = useState(true);
-
   const value = useScroll();
 
   useEffect(() => {
@@ -57,7 +56,11 @@ const Header = ({ session }: HeaderProp) => {
         )}
       >
         <div>
-          <Link href="/" className="flex items-center gap-6px">
+          <Link
+            onClick={handleClose}
+            href="/"
+            className="flex items-center gap-6px"
+          >
             <Icon icon="logo" size={52} height={45} viewBox="0 0 52 45" />
             <Typo text="Fantasture" type="logo" color="[#000]" />
           </Link>
