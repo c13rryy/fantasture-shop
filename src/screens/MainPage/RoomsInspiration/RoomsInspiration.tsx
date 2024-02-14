@@ -2,6 +2,7 @@ import Button from "@/components/ui/button/button";
 import Section from "@/components/ui/section/section";
 import Typo from "@/components/ui/typography/typo";
 import RoomsSwiper from "@/components/Sliders/RoomsSwiper/RoomsSwiper";
+import Link from "next/link";
 
 const RoomsInspiration = () => {
   return (
@@ -20,9 +21,11 @@ const RoomsInspiration = () => {
               text="Our designer already made a lot of beautiful prototipe of rooms that inspire you"
             />
           </div>
-          <Button classes="w-fit" size="subscribe">
-            Explore More
-          </Button>
+          <Link href="/shop">
+            <Button classes="w-fit" size="subscribe">
+              Explore More
+            </Button>
+          </Link>
         </div>
         <div className="lg:max-w-[1150px] max-w-[1280px]">
           <RoomsSwiper />

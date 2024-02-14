@@ -1,14 +1,39 @@
+import { fetchFeed } from "@/actions/fetchProducts";
 import Banner from "@/components/Banner/Banner";
 import { Icon } from "@/components/ui/Icon/Icon";
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/constants";
+import { INFINITE_SCROLL_PAGINATION_RESULTS, PAGE_SIZE } from "@/constants";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import Assortment from "@/screens/ShopPage/Assortment/Assortment";
 import NavigationLogo from "@/screens/ShopPage/NavigationLogo/NavigationLogo";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
-async function Products() {
+export type PageProps = {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key: string]: string | undefined };
+};
+
+export const metadata: Metadata = {
+  title: "Shop",
+  description: "It is shop page",
+};
+
+async function Products(props: PageProps) {
   const session = await getAuthSession();
+
+  const pageNumber = Number(props.searchParams?.page || 1);
+  const pageCategory = props.searchParams?.category || "";
+
+  const take = PAGE_SIZE;
+  const skip = (pageNumber - 1) * take;
+
+  const { data, metadata, error } = await fetchFeed({
+    take,
+    skip,
+    categoryName: pageCategory,
+    page: pageNumber,
+  });
 
   const products = await db.product.findMany({
     orderBy: {
@@ -25,16 +50,23 @@ async function Products() {
   });
 
   const categories = await db.category.findMany();
+
   return (
     <Assortment
       session={session}
       categories={categories}
       initialProducts={products}
+      {...metadata}
+      {...props.searchParams}
+      page={pageNumber}
+      pageCategory={pageCategory}
+      filterData={data}
+      error={error}
     />
   );
 }
 
-export default async function Shop() {
+export default async function Shop(props: PageProps) {
   return (
     <>
       <NavigationLogo />
@@ -47,9 +79,8 @@ export default async function Shop() {
           </div>
         }
       >
-        <Products />
+        <Products {...props} />
       </Suspense>
-
       <Banner />
     </>
   );

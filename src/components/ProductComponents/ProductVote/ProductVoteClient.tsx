@@ -35,7 +35,9 @@ const ProductVoteClient: FC<ProductVoteClientProps> = ({
     setCurrentVote(initialVote);
   }, [initialVote]);
 
-  const { mutate: addVote } = useMutation({
+
+  const { mutate: addVote, isPending } = useMutation({
+
     mutationFn: async (type: VoteType) => {
       const payload: ProductVoteRequest = {
         productId,
@@ -128,13 +130,26 @@ const ProductVoteClient: FC<ProductVoteClientProps> = ({
         <Typo tag="h3" text={amount} />
       </div>
       {votes.map((vote, idx) => (
+
+        <button
+          disabled={isPending}
+          className="relative"
+          key={vote}
+          onClick={() => addVote(vote)}
+        >
+
         <button key={vote} onClick={() => addVote(vote)}>
+
           <Icon
             icon="star"
             size={24}
             color={amount >= idx + 1 ? "#d09e23" : "#ccc"}
             fill={amount >= idx + 1 ? "#fff" : "transparent"}
           />
+          {currentVote === vote && (
+            <div className="absolute top-[9px] left-[9px] w-[6px] h-[6px] rounded-[50%] bg-[#d09e23]" />
+          )}
+
         </button>
       ))}
     </div>

@@ -8,9 +8,10 @@ import { CartContext } from "@/store/cart-store";
 
 interface HeaderActionProp {
   session: Session | null;
+  closeMenu?: () => void;
 }
 
-const HeaderActions = ({ session }: HeaderActionProp) => {
+const HeaderActions = ({ session, closeMenu }: HeaderActionProp) => {
   const { toggle } = useContext(ModalContext);
   const { items } = useContext(CartContext);
 
@@ -57,9 +58,18 @@ const HeaderActions = ({ session }: HeaderActionProp) => {
           </div>
         </div>
       ) : (
-        <Link href="/sign-in">
-          <Button size="small">Sign In</Button>
-        </Link>
+        <div className="flex items-center xl:justify-start justify-center gap-16px">
+          <div className="flex">
+            <button onClick={() => toggle("searchModal")}>
+              <Icon icon="search" size={28} viewBox="0 0 28 28" />
+            </button>
+          </div>
+          <Link onClick={closeMenu} href="/sign-in">
+            <Button classes="xl:w-fit w-full" size="small">
+              Sign In
+            </Button>
+          </Link>
+        </div>
       )}
     </>
   );

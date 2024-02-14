@@ -1,5 +1,3 @@
-/* import Link from "next/link"; */
-
 import { Icon } from "@/components/ui/Icon/Icon";
 
 export default function NotFound() {

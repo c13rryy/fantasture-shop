@@ -43,7 +43,7 @@ const ProductItem = forwardRef<HTMLDivElement, ProductItemProps>(
                 src={imgSrc}
                 alt={title}
                 fill
-                sizes="100vw"
+                sizes="100%"
                 loading="lazy"
                 className="object-cover"
               />

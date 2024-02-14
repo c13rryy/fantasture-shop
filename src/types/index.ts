@@ -15,8 +15,6 @@ export interface BannerCardProps {
 export interface FilterButtonProps {
   /* iconName: IAvailableIcons; */
   title: string;
-  onClick: () => void;
-  isActive: boolean;
 }
 
 export type ProductType = {

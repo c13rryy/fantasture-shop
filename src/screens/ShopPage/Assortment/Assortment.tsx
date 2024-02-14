@@ -2,18 +2,20 @@
 
 import ProductItem from "@/components/Cards/ProductItem/ProductItem";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
+import Pagination from "@/components/Pagination/Pagination";
 import FilterSlider from "@/components/Sliders/FilterSlider/FilterSlider";
 import { Icon } from "@/components/ui/Icon/Icon";
-import Button from "@/components/ui/button/button";
 import Section from "@/components/ui/section/section";
+import Typo from "@/components/ui/typography/typo";
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/constants";
 import { hasSubscription } from "@/lib/utils";
-import { ExtendedProduct, FilterData } from "@/types/db";
+import { ExtendedProduct, ProductData } from "@/types/db";
 import { useIntersection } from "@mantine/hooks";
 import { Category } from "@prisma/client";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Session } from "next-auth";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 
@@ -21,44 +23,33 @@ interface AssortmentProps {
   initialProducts: ExtendedProduct[];
   categories: Category[];
   session: Session | null;
+  page?: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  pageCategory?: string;
+  filterData: ProductData[] | [] | undefined;
+  error?: string;
 }
 
 const Assortment = ({
   initialProducts,
   categories,
   session,
+  page: filterPage,
+  totalPages,
+  hasNextPage,
+  pageCategory,
+  filterData,
+  error,
 }: AssortmentProps) => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const router = useRouter();
   const [page, setPage] = useState(1);
-  const [filterPage, setFilterPage] = useState(1);
   const lastPostRef = useRef<HTMLDivElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
     threshold: 1,
   });
 
-  const {
-    data: categoryData,
-    refetch,
-    isFetching,
-  } = useQuery({
-    queryFn: async () => {
-      if (!activeCategory) {
-        return null;
-      }
-      const { data } = await axios.get(
-        `/api/products/filter?id=${activeCategory}&limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${filterPage}`
-      );
-      return data as {
-        filterData: FilterData;
-        hasMore: boolean;
-        quantityOfPage: number;
-      };
-    },
-    queryKey: ["filter-query"],
-    enabled: false,
-  });
+  const router = useRouter();
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ["products"],
@@ -73,16 +64,11 @@ const Assortment = ({
     getNextPageParam: (_, pages) => {
       return pages.length + 1;
     },
-
     initialData: {
       pages: [{ products: initialProducts, quantityOfPage: 1 }],
       pageParams: [1],
     },
   });
-
-  function handleFilter(id: string | null) {
-    setActiveCategory(id);
-  }
 
   useEffect(() => {
     return () => {
@@ -92,15 +78,7 @@ const Assortment = ({
     };
   }, [router]);
 
-  useEffect(() => {
-    if (activeCategory) {
-      refetch();
-    } else if (filterPage > 1) {
-      refetch();
-    } else {
-      refetch();
-    }
-  }, [activeCategory, filterPage, refetch]);
+
 
   const pagesQuantity = useMemo(
     () => data.pages.flatMap(page => page.quantityOfPage),
@@ -108,27 +86,33 @@ const Assortment = ({
   );
 
   useEffect(() => {
-    if (entry?.isIntersecting && page !== pagesQuantity[0] && !activeCategory) {
+    if (
+      entry?.isIntersecting &&
+      page !== pagesQuantity[0] &&
+      pageCategory === ""
+    ) {
       fetchNextPage();
     }
-  }, [entry, fetchNextPage, pagesQuantity, activeCategory, page]);
+  }, [entry, fetchNextPage, pagesQuantity, page, pageCategory]);
 
   const productData = useMemo(() => {
-    if (categoryData?.filterData.products) {
-      return categoryData.filterData.products;
+    if (filterData && filterData.length > 0) {
+      return filterData;
     }
-
+    if (error) {
+      return [];
+    }
     if (data) {
       return data.pages.flatMap(page => page.products);
     }
 
     return initialProducts;
-  }, [categoryData?.filterData.products, data, initialProducts]);
+  }, [data, error, filterData, initialProducts]);
 
   return (
     <Section>
       <MaxWidthWrapper className="xh:w-full w-[95%]">
-        <FilterSlider filterFn={handleFilter} categories={categories} />
+        <FilterSlider categories={categories} />
         <div className="grid relative lg:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-32px sm:gap-24px gap-16px sm:mt-40 mt-24">
           {productData.map((product, idx) => {
             if (idx === productData.length - 1) {
@@ -172,17 +156,25 @@ const Assortment = ({
               );
             }
           })}
-
-          {isFetching && (
-            <div className="inset-[0] flex justify-center items-center bg-product_load absolute">
-              <div>
-                <div className="animate-spin">
-                  <Icon icon="loader" size={48} viewBox="0 0 24 24" />
-                </div>
-              </div>
-            </div>
-          )}
         </div>
+        {productData?.length === 0 && (
+          <div className="flex flex-col items-center gap-12px justify-center">
+            <Typo
+              tag="h3"
+              text="Unavailable filtering options"
+              color="grey_3"
+            />
+            <div className="flex gap-8px items-center">
+              <Typo type="mediumP" text={error} color="grey_3" />
+              <Link
+                className="font-normal leading-normal underline text-16 text-black_2"
+                href="/shop"
+              >
+                Go shopping
+              </Link>
+            </div>
+          </div>
+        )}
         {isFetchingNextPage && (
           <div className="w-full flex justify-center">
             <div className="animate-spin">
@@ -190,29 +182,14 @@ const Assortment = ({
             </div>
           </div>
         )}
+        {totalPages > 1 && (
+          <Pagination
+            page={filterPage}
+            pageCategory={pageCategory}
+            totalPages={totalPages}
+            hasNextPage={hasNextPage}
+          />
 
-        {(categoryData?.quantityOfPage ?? 1) > 1 && (
-          <div className="flex gap-10px items-center justify-center mt-20">
-            <Button
-              onClick={() => setFilterPage(old => Math.max(old - 1, 1))}
-              disabled={filterPage === 1}
-              size="subscribe"
-            >
-              Previous Page
-            </Button>
-            <Button
-              disabled={
-                filterPage === Math.round(categoryData?.quantityOfPage ?? 1)
-              }
-              onClick={() =>
-                setFilterPage(old => (categoryData?.hasMore ? old + 1 : old))
-              }
-              size="subscribe"
-              classes="disabled:bg-grey_1 disabled:border-grey_1 disabled:text-white"
-            >
-              Next Page
-            </Button>
-          </div>
         )}
       </MaxWidthWrapper>
     </Section>

@@ -15,6 +15,7 @@ import Button from "@/components/ui/button/button";
 import { CartContext } from "@/store/cart-store";
 import ProductModal from "../ProductModal/ProductModal";
 import { ProductType } from "@/types";
+import toast from "react-hot-toast";
 
 interface SubscribeModalProps {
   subData: Product[];
@@ -38,10 +39,14 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
 
       return data as string;
     },
-    onSuccess: () => {
+    onSuccess: data => {
       startTransition(() => {
         router.refresh();
       });
+
+      if (data === "Delete") {
+        return toast.success("You successfully usubscribed from this product");
+      }
     },
   });
 
