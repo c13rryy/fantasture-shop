@@ -48,6 +48,7 @@ const RoomsSwiper = () => {
                   alt={item.title}
                   fill
                   placeholder="blur"
+                  loading="lazy"
                   sizes="100vw"
                   className="object-cover"
                 />
