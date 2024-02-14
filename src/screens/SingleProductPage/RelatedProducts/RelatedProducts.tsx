@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { hasSubscription } from "@/lib/utils";
 import Link from "next/link";
 
+
 interface RelatedProductsProps {
   productId: string;
 }

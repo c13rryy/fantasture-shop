@@ -78,6 +78,8 @@ const Assortment = ({
     };
   }, [router]);
 
+
+
   const pagesQuantity = useMemo(
     () => data.pages.flatMap(page => page.quantityOfPage),
     [data.pages]
@@ -180,7 +182,6 @@ const Assortment = ({
             </div>
           </div>
         )}
-
         {totalPages > 1 && (
           <Pagination
             page={filterPage}
@@ -188,6 +189,7 @@ const Assortment = ({
             totalPages={totalPages}
             hasNextPage={hasNextPage}
           />
+
         )}
       </MaxWidthWrapper>
     </Section>
