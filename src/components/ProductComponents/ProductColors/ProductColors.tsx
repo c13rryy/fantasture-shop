@@ -2,15 +2,22 @@
 
 import { Icon } from "@/components/ui/Icon/Icon";
 import Typo from "@/components/ui/typography/typo";
+import { ProductType } from "@/types";
 import { Color } from "@prisma/client";
 import { FC, useState } from "react";
+import toast from "react-hot-toast";
 
 interface ProductColorsProps {
   colors: Color[] | undefined;
   onSelectColor: (color: string) => void;
+  disableButton?: ProductType;
 }
 
-const ProductColors: FC<ProductColorsProps> = ({ colors, onSelectColor }) => {
+const ProductColors: FC<ProductColorsProps> = ({
+  colors,
+  onSelectColor,
+  disableButton,
+}) => {
   const [activeColor, setActiveColor] = useState<string>("");
   const isColorActive = (colorValue: string) => activeColor === colorValue;
 
@@ -18,7 +25,7 @@ const ProductColors: FC<ProductColorsProps> = ({ colors, onSelectColor }) => {
     setActiveColor(() => {
       return isColorActive(colorValue) ? "" : colorValue;
     });
-    onSelectColor(colorValue);
+    onSelectColor(activeColor === colorValue ? "" : colorValue);
   };
   return (
     <div>
@@ -28,7 +35,13 @@ const ProductColors: FC<ProductColorsProps> = ({ colors, onSelectColor }) => {
           <button
             key={color.id}
             className="w-[30px] h-[30px] flex justify-center items-center rounded-[50%]"
-            onClick={() => handleClick(color.value)}
+            onClick={() => {
+              if (disableButton)
+                return toast.error("item is already in the cart");
+              if (!disableButton) {
+                handleClick(color.value);
+              }
+            }}
             style={{
               background: color.value,
             }}

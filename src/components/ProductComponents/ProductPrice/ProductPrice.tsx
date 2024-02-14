@@ -39,7 +39,9 @@ const ProductPrice: FC<ProductPriceProps> = ({ price, discount, type }) => {
             }
           )}
         >
-          {currencyFormatter.format(calculateDiscountPrice(price, discount))}
+          {currencyFormatter.format(
+            Number(price) - calculateDiscountPrice(price, discount)
+          )}
         </span>
       )}
     </div>

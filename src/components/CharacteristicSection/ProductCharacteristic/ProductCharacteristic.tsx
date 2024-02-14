@@ -70,8 +70,16 @@ const ProductCharacteristic: FC<ProductCharacteristicProps> = ({
   return (
     <div>
       <div className="flex flex-col gap-10px">
-        <ProductColors colors={colors} onSelectColor={handleProductColor} />
-        <ProductSize sizes={sizes} onSelectSize={handleProductSize} />
+        <ProductColors
+          disableButton={check}
+          colors={colors}
+          onSelectColor={handleProductColor}
+        />
+        <ProductSize
+          disableButton={check}
+          sizes={sizes}
+          onSelectSize={handleProductSize}
+        />
       </div>
       <div className="inline-flex items-center gap-16px mt-32">
         <button
@@ -96,7 +104,7 @@ const ProductCharacteristic: FC<ProductCharacteristicProps> = ({
           onClick={() => {
             if (!productColor || !productSize)
               return toast.error("Pick all missing data");
-            if (cartData) {
+            if (cartData && productColor && productSize) {
               addItem(cartData);
             }
             if (!check) {

@@ -15,7 +15,7 @@ export async function GET(req: Request) {
         page: url.searchParams.get("page"),
       });
 
-    const allProducts = await db.product.findMany();
+    const allProductsTotal = await db.product.count();
 
     const products = await db.product.findMany({
       take: parseInt(limit),
@@ -30,7 +30,7 @@ export async function GET(req: Request) {
       },
     });
 
-    const quantityOfPage = Math.round(allProducts.length / parseInt(limit));
+    const quantityOfPage = Math.round(allProductsTotal / parseInt(limit));
 
     return new Response(JSON.stringify({ products, quantityOfPage }));
   } catch (error) {
