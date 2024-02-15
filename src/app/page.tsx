@@ -1,13 +1,12 @@
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/constants";
-
-import { db } from "@/lib/db";
+/* import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/constants"; */
+/* import { db } from "@/lib/db"; */
 import Logo from "@/screens/MainPage/Logo/Logo";
-import Products from "@/screens/MainPage/Products/Products";
+/* import Products from "@/screens/MainPage/Products/Products"; */
 import ProductsRange from "@/screens/MainPage/ProductsRange/ProductsRange";
 import RoomsInspiration from "@/screens/MainPage/RoomsInspiration/RoomsInspiration";
 
 export default async function Home() {
-  const products = await db.product.findMany({
+  /*  const products = await db.product.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -16,13 +15,13 @@ export default async function Home() {
       votes: true,
     },
     take: INFINITE_SCROLL_PAGINATION_RESULTS,
-  });
+  }); */
 
   return (
     <>
       <Logo />
       <ProductsRange />
-      <Products data={products} />
+      {/* <Products data={products} /> */}
       <RoomsInspiration />
     </>
   );
