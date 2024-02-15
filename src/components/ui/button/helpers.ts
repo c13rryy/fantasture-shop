@@ -11,7 +11,6 @@ export const buttonStyles = {
     "px-10 py-4 font-medium text-14 uppercase text-white bg-brown_2 leading-6 rounded-md duration-700 hover:duration-700 hover:bg-brown_1",
   disabledButton:
     "disabled:bg-grey_1 disabled:border-grey_1 disabled:text-white",
-  filterButton: "p-14",
   customButton: "rounded-[50px] py-6 px-30 font-normal text-12 leading-normal",
   authButton: "bg-black_1 text-white p-14",
 };

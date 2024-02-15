@@ -23,7 +23,7 @@
 }
 
 .height-animation {
-  transition: height 1000ms ease-in-out;
+  transition: max-height 1s ease-in-out;
 }
 
 .error-animation {

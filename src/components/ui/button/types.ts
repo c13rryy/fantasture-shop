@@ -5,6 +5,5 @@ export type VariantsButtonSize =
   | "small"
   | "default"
   | "subscribe"
-  | "filter"
   | "custom"
   | "auth";

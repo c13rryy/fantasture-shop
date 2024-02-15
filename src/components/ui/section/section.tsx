@@ -15,7 +15,6 @@ const Section = ({ classes, title, children }: SectionProps) => {
           {title}
         </Typo>
       )}
-
       {children}
     </section>
   );

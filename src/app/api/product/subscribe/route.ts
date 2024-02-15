@@ -15,31 +15,57 @@ export async function POST(req: Request) {
 
     const { productId } = ProductSubscriptionValidator.parse(body);
 
-    const subscriptionExists = await db.subscription.findFirst({
-      where: {
-        productId,
-        userId: session.user.id,
-      },
-    });
-
-    if (subscriptionExists) {
-      await db.subscription.delete({
+    if (typeof productId === "string") {
+      const subscriptionExists = await db.subscription.findFirst({
         where: {
-          id: subscriptionExists.id,
+          productId,
+          userId: session.user.id,
         },
       });
 
-      return new Response("Delete");
+      if (subscriptionExists) {
+        await db.subscription.delete({
+          where: {
+            id: subscriptionExists.id,
+          },
+        });
+
+        return new Response("Delete");
+      }
+
+      await db.subscription.create({
+        data: {
+          productId,
+          userId: session.user.id,
+        },
+      });
+
+      return new Response(productId);
     }
 
-    await db.subscription.create({
-      data: {
-        productId,
+    const subscriptionsExists = await db.subscription.findMany({
+      where: {
+        productId: {
+          in: productId,
+        },
         userId: session.user.id,
       },
     });
 
-    return new Response(productId);
+    if (subscriptionsExists) {
+      const subscriptionIds = subscriptionsExists.map(
+        subscription => subscription.id
+      );
+
+      await db.subscription.deleteMany({
+        where: {
+          id: {
+            in: subscriptionIds,
+          },
+        },
+      });
+      return new Response("Delete");
+    }
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(error.message, { status: 422 });

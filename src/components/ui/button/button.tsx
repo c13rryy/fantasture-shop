@@ -49,7 +49,6 @@ const Button = ({
         [buttonStyles.subscribeButton]: size === "subscribe",
         [buttonStyles.disabledButton]: disabled,
         [buttonStyles.customButton]: size === "custom",
-        [buttonStyles.filterButton]: size === "filter",
         [buttonStyles.authButton]: size === "auth",
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +69,6 @@ const Button = ({
         </div>
       )}
       {children}
-      {/* TODO: Fetching logo indicator */}
     </button>
   );
 };

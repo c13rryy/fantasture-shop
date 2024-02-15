@@ -4,7 +4,7 @@ import MiniProduct from "@/components/Cards/MiniProduct/MiniProduct";
 import Modal from "@/components/ui/modal/modal";
 import Typo from "@/components/ui/typography/typo";
 import { ModalContext } from "@/store/modal-store";
-import { FC, startTransition, useContext, useState } from "react";
+import { FC, startTransition, useContext, useMemo, useState } from "react";
 import { Product } from "@prisma/client";
 import { Icon } from "@/components/ui/Icon/Icon";
 import { useMutation } from "@tanstack/react-query";
@@ -53,6 +53,8 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
   function closeModal() {
     toggle("subModal");
   }
+
+  const productIds = useMemo(() => subData.map(el => el.id), [subData]);
   return (
     <>
       <Modal isOpen={open.subModal} toggle={closeModal}>
@@ -133,6 +135,17 @@ const SubscribeModal: FC<SubscribeModalProps> = ({ subData }) => {
             )}
           </div>
         </div>
+        {subData.length > 0 && (
+          <div>
+            <Button
+              onClick={() => unsubscribe({ productId: productIds })}
+              size="large"
+              classes="w-full"
+            >
+              Unsubscribe from all
+            </Button>
+          </div>
+        )}
       </Modal>
       {cartData && <ProductModal item={cartData} />}
     </>

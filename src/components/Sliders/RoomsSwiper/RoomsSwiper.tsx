@@ -36,11 +36,14 @@ const RoomsSwiper = () => {
       >
         {ROOM_SWIPER.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div>
+            <div className="h-full">
               <div
                 className={classNames(
-                  "relative md:w-[372px] w-[300px] md:h-[468px] h-[360px] height-animation",
-                  { "md:h-[582px] sm:h-[420px] h-[360px]": activeSlide === idx }
+                  "relative h-full md:w-[372px] w-[300px] md:max-h-[468px] max-h-[360px] height-animation",
+                  {
+                    "md:max-h-[582px] sm:max-h-[420px] max-h-[360px]":
+                      activeSlide === idx,
+                  }
                 )}
               >
                 <Image
@@ -67,7 +70,7 @@ const RoomsSwiper = () => {
                     <Typo type="defaultP">{item.description}</Typo>
                   </div>
                   <div className="sm:mb-24 mb-[0px] sm:p-[12px] p-10 bg-[#7F4E25B2] rounded-[6px]">
-                    <Link href="/">
+                    <Link href="/shop">
                       <Icon icon="arrow" size={24} />
                     </Link>
                   </div>
