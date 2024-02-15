@@ -5,8 +5,8 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import Providers from "@/components/Providers/Providers";
 import { getAuthSession } from "@/lib/auth";
-import SubscribeModal from "@/components/Modals/SubscribeModal/SubscribeModal";
-import { db } from "@/lib/db";
+/* import SubscribeModal from "@/components/Modals/SubscribeModal/SubscribeModal";
+import { db } from "@/lib/db"; */
 import { Toaster } from "react-hot-toast";
 import SearchModal from "@/components/Modals/SearchModal/SearchModal";
 import CartModal from "@/components/Modals/CartModal/CartModal";
@@ -30,7 +30,7 @@ export default async function RootLayout({
 }) {
   const session = await getAuthSession();
 
-  const subData = await db.user.findFirst({
+  /* const subData = await db.user.findFirst({
     where: {
       id: session?.user.id,
     },
@@ -43,7 +43,7 @@ export default async function RootLayout({
     },
   });
 
-  const products = subData?.subscriptions.map(el => el.product);
+  const products = subData?.subscriptions.map(el => el.product); */
 
   return (
     <html lang="en" className="w-full">
@@ -59,7 +59,7 @@ export default async function RootLayout({
           </main>
           <Footer />
           <CartModal />
-          {products && <SubscribeModal subData={products} />}
+          {/* {products && <SubscribeModal subData={products} />} */}
           <SearchModal />
           <NotificationModal />
         </body>
