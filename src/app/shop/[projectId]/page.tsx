@@ -9,12 +9,10 @@ interface SingleProductPageProps {
   };
 }
 
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const id = params.id;
+export async function generateMetadata({
+  params,
+}: SingleProductPageProps): Promise<Metadata> {
+  const id = params.projectId;
   const product = await db.product.findFirst({
     where: {
       id,

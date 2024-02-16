@@ -7,7 +7,6 @@ import { db } from "@/lib/db";
 import { hasSubscription } from "@/lib/utils";
 import Link from "next/link";
 
-
 interface RelatedProductsProps {
   productId: string;
 }
@@ -27,16 +26,11 @@ const RelatedProducts = async ({ productId }: RelatedProductsProps) => {
     },
     include: {
       products: {
-        take: 4,
-        where: {
-          NOT: {
-            id: productId,
-          },
-        },
         include: {
           subscribers: true,
           votes: true,
         },
+        take: 4,
       },
     },
   });
