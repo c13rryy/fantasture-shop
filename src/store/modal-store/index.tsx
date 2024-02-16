@@ -67,7 +67,7 @@ export function ModalContextProvider({
   function productModalToggle(id: string) {
     setProductOpen(prevState => ({
       ...prevState,
-      [id]: !prevState[id], // инвертируем состояние модального окна для данного продукта
+      [id]: !prevState[id],
     }));
   }
 
