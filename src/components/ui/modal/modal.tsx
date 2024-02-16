@@ -50,7 +50,7 @@ const Modal = ({ children, isOpen, toggle }: ModalProps) => {
 
   return mounted
     ? createPortal(
-        <div className="fixed inset-[0] flex justify-end overflow-y-auto items-start z-[130] bg-[#000] bg-opacity-25 backdrop-blur-sm">
+        <div className="fixed inset-[0] flex justify-end overflow-y-auto overflow-x-hidden items-start z-[130] bg-[#000] bg-opacity-25 backdrop-blur-sm">
           <div
             ref={modalWindow}
             className="mds:w-[417px] w-full modal-animation bg-white sm:p-27 p-17"
