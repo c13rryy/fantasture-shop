@@ -21,6 +21,20 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Home",
   description: "It is home page",
+  openGraph: {
+    title: "Our shop",
+    description: "Some information about shop",
+    url: "https://fantasture-shop.vercel.app",
+    images: [
+      {
+        url: "/images/metaImage.png",
+        width: 300,
+        height: 300,
+      },
+    ],
+    type: "website",
+    siteName: "Fantasture",
+  },
 };
 
 export default async function RootLayout({

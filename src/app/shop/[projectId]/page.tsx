@@ -22,6 +22,20 @@ export async function generateMetadata({
   return {
     title: product?.name,
     description: `It is ${product?.name}`,
+    openGraph: {
+      title: product?.name,
+      description: product?.description,
+      url: `https://fantasture-shop.vercel.app/shop/${product?.id}`,
+      images: [
+        {
+          url: product?.imageUrl ?? "",
+          width: 300,
+          height: 300,
+        },
+      ],
+      type: "website",
+      siteName: "Fantasture",
+    },
   };
 }
 

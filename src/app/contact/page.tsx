@@ -6,6 +6,20 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact",
   description: "It is contact page",
+  openGraph: {
+    title: "Get in touch",
+    description: "Always available",
+    url: "https://fantasture-shop.vercel.app/contact",
+    images: [
+      {
+        url: "/images/metaImage.png",
+        width: 300,
+        height: 300,
+      },
+    ],
+    type: "website",
+    siteName: "Fantasture",
+  },
 };
 
 const page = () => {

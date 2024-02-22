@@ -1,5 +1,25 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import SignIn from "@/components/SignIn/SignIn";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign-in",
+  description: "Sign-in to continue",
+  openGraph: {
+    title: "Fantasture shop",
+    description: "It is first shop",
+    url: "https://fantasture-shop.vercel.app/sign-in",
+    images: [
+      {
+        url: "/images/metaImage.png",
+        width: 300,
+        height: 300,
+      },
+    ],
+    type: "website",
+    siteName: "Fantasture",
+  },
+};
 
 const page = ({}) => {
   return (
