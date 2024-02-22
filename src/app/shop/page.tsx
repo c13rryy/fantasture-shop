@@ -21,13 +21,6 @@ export const metadata: Metadata = {
     title: "Product of our shop",
     description: "We have a huge assortment of furniture",
     url: "https://fantasture-shop.vercel.app/shop",
-    images: [
-      {
-        url: "/images/metaImage.png",
-        width: 300,
-        height: 300,
-      },
-    ],
     type: "website",
     siteName: "Fantasture",
   },

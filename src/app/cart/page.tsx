@@ -10,13 +10,6 @@ export const metadata: Metadata = {
     title: "Your cart",
     description: "We can show all of you products",
     url: "https://fantasture-shop.vercel.app/cart",
-    images: [
-      {
-        url: "/images/metaImage.png",
-        width: 300,
-        height: 300,
-      },
-    ],
     type: "website",
     siteName: "Fantasture",
   },

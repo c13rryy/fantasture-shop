@@ -9,13 +9,6 @@ export const metadata: Metadata = {
     title: "Fantasture shop",
     description: "It is the first shop",
     url: "https://fantasture-shop.vercel.app/sign-up",
-    images: [
-      {
-        url: "/images/metaImage.png",
-        width: 300,
-        height: 300,
-      },
-    ],
     type: "website",
     siteName: "Fantasture",
   },
