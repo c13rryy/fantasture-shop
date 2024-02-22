@@ -1,19 +1,19 @@
+"use client";
 import ProductItem from "@/components/Cards/ProductItem/ProductItem";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import Button from "@/components/ui/button/button";
 import Section from "@/components/ui/section/section";
-import { getAuthSession } from "@/lib/auth";
 import { hasSubscription } from "@/lib/utils";
 import { ProductData } from "@/types/db";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-/* import Link from "next/link"; */
 
 interface ProductsProps {
   data: ProductData[];
 }
 
-const Products = async ({ data }: ProductsProps) => {
-  const session = await getAuthSession();
+const Products = ({ data }: ProductsProps) => {
+  const { data: session } = useSession();
 
   return (
     <Section title="Our Products">
