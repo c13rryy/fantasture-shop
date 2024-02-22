@@ -24,11 +24,12 @@ const CartModal = () => {
         if (cartItem.discount) {
           return (
             value +
-            calculateDiscountPrice(cartItem.price, cartItem.discount) *
-              (cartItem.quantity ?? 1)
+            (Number(cartItem.price) -
+              calculateDiscountPrice(cartItem.price, cartItem.discount)) *
+              (cartItem.quantity ?? 0)
           );
         }
-        return value + parseInt(cartItem.price) * (cartItem.quantity ?? 1);
+        return value + Number(cartItem.price) * (cartItem.quantity ?? 0);
       }, 0),
     [items]
   );
@@ -36,6 +37,7 @@ const CartModal = () => {
   function closeModal() {
     toggle("cartModal");
   }
+
   return (
     <Modal isOpen={open.cartModal} toggle={closeModal}>
       <div className="flex justify-between border-b-[1px] border-solid pb-20 items-center">

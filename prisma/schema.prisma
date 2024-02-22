@@ -109,6 +109,7 @@ model Product {
   votes           Vote[]
   sizeIds         String[]       @db.ObjectId
   colorIds        String[]       @db.ObjectId
+  orderItems      OrderItem[]
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 }
@@ -146,4 +147,25 @@ model CommentVote {
   comment   Comment         @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId String          @db.ObjectId
   type      CommentVoteType
+}
+
+model Order {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  items         OrderItem[]
+  isPaid        Boolean     @default(false)
+  totalPrice    Float       @default(0)
+  phone         String      @default("")
+  address       String      @default("")
+  orderQuantity Int
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @db.ObjectId
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String  @db.ObjectId
+  quantity  Int
 }

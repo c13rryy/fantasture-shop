@@ -1,3 +1,4 @@
+import { OrderProductData } from "@/types";
 import { Subscription, VoteType } from "@prisma/client";
 import { formatDistanceToNowStrict } from "date-fns";
 
@@ -83,7 +84,7 @@ export function formatTimeToNow(date: Date): string {
 }
 
 export function calculateDiscountPrice(price: string, discount: string) {
-  return (parseInt(price) * parseInt(discount)) / 100;
+  return Math.round((parseInt(price) * parseInt(discount)) / 100);
 }
 
 export const validateEmail = (email: unknown) => {
@@ -92,4 +93,17 @@ export const validateEmail = (email: unknown) => {
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
+};
+
+export const productQuantity = (
+  id: string,
+  productData: Array<OrderProductData>
+) => {
+  if (productData) {
+    const currentProduct = productData.findIndex(el => el.productId === id);
+
+    return productData[currentProduct].quantity;
+  }
+
+  return 0;
 };

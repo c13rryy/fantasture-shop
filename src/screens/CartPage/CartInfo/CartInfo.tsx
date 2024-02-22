@@ -1,6 +1,7 @@
 "use client";
 
 import CartProduct from "@/components/Cards/CartProduct/CartProduct";
+import CheckoutButton from "@/components/CheckoutButton/CheckoutButton";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import ProductQuantityButton from "@/components/ProductComponents/ProductQuantityButton/ProductQuantityButton";
 import Button from "@/components/ui/button/button";
@@ -11,13 +12,11 @@ import { CartContext } from "@/store/cart-store";
 import { NotificationContext } from "@/store/notification-store";
 import classNames from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useContext, useMemo } from "react";
 
 const CartInfo = () => {
   const { items, clearCart } = useContext(CartContext);
   const { toggle } = useContext(NotificationContext);
-  const router = useRouter();
 
   const cartTotal = useMemo(
     () =>
@@ -25,11 +24,12 @@ const CartInfo = () => {
         if (cartItem.discount) {
           return (
             value +
-            calculateDiscountPrice(cartItem.price, cartItem.discount) *
-              (cartItem.quantity ?? 1)
+            (Number(cartItem.price) -
+              calculateDiscountPrice(cartItem.price, cartItem.discount)) *
+              (cartItem.quantity ?? 0)
           );
         }
-        return value + parseInt(cartItem.price) * (cartItem.quantity ?? 1);
+        return value + Number(cartItem.price) * (cartItem.quantity ?? 0);
       }, 0),
     [items]
   );
@@ -45,7 +45,8 @@ const CartInfo = () => {
       if (cartItem.discount) {
         return (
           value +
-          calculateDiscountPrice(cartItem.price, cartItem.discount) *
+          (Number(cartItem.price) -
+            calculateDiscountPrice(cartItem.price, cartItem.discount)) *
             (cartItem.quantity ?? 1)
         );
       }
@@ -56,7 +57,7 @@ const CartInfo = () => {
       return 0;
     }
 
-    return Math.round((discountPrice * 100) / defaultPrice);
+    return 100 - Math.round((discountPrice * 100) / defaultPrice);
   }, [items]);
 
   return (
@@ -129,13 +130,7 @@ const CartInfo = () => {
                   color="grey_3"
                 />
               </div>
-              <Button
-                onClick={() => router.push("/")}
-                classes="w-full"
-                size="large"
-              >
-                Checkout
-              </Button>
+              <CheckoutButton />
             </div>
           </div>
         )}

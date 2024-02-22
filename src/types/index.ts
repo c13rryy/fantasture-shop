@@ -36,3 +36,8 @@ export type ProductType = {
   subscribers?: Subscription[];
   votes?: Vote[];
 };
+
+export interface OrderProductData {
+  productId: string;
+  quantity: number;
+}
