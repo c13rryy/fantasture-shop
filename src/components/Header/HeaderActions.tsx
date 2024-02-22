@@ -30,25 +30,31 @@ const HeaderActions = ({ session, closeMenu }: HeaderActionProp) => {
       {session?.user ? (
         <div className="flex items-center xl:justify-start justify-center lg:gap-[45px] gap-32px">
           <div className="flex">
-            <button onClick={() => toggle("accountModal")}>
+            <button
+              aria-label="open-profile"
+              onClick={() => toggle("accountModal")}
+            >
               <Icon icon="profile" size={28} viewBox="0 0 28 28" />
             </button>
           </div>
 
           <div className="flex">
-            <button onClick={() => toggle("searchModal")}>
+            <button aria-label="search" onClick={() => toggle("searchModal")}>
               <Icon icon="search" size={28} viewBox="0 0 28 28" />
             </button>
           </div>
 
           <div className="flex">
-            <button onClick={() => toggle("subModal")}>
+            <button
+              aria-label="subscribe-modal"
+              onClick={() => toggle("subModal")}
+            >
               <Icon icon="headerLike" size={28} viewBox="0 0 28 28" />
             </button>
           </div>
 
           <div className="flex relative">
-            <button onClick={() => toggle("cartModal")}>
+            <button aria-label="cart" onClick={() => toggle("cartModal")}>
               <Icon icon="cart" size={28} viewBox="0 0 28 28" />
             </button>
 
@@ -60,12 +66,12 @@ const HeaderActions = ({ session, closeMenu }: HeaderActionProp) => {
       ) : (
         <div className="flex items-center xl:justify-start justify-center gap-16px">
           <div className="flex">
-            <button onClick={() => toggle("searchModal")}>
+            <button aria-label="search" onClick={() => toggle("searchModal")}>
               <Icon icon="search" size={28} viewBox="0 0 28 28" />
             </button>
           </div>
           <Link onClick={closeMenu} href="/sign-in">
-            <Button classes="xl:w-fit w-full" size="small">
+            <Button aria-label="sign-in" classes="xl:w-fit w-full" size="small">
               Sign In
             </Button>
           </Link>

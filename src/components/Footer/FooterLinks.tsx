@@ -16,7 +16,7 @@ const FooterLinks = ({ title, links }: FooterLinksProp) => {
       <div className="sm:flex grid grid-cols-2 justify-items-start flex-col sm:gap-[46px] gap-12px">
         {links.map(link => (
           <div key={link.value}>
-            <Link href={link.href}>
+            <Link aria-label={`Go to the ${link.value} page`} href={link.href}>
               <Typo type="links">{link.value}</Typo>
             </Link>
           </div>

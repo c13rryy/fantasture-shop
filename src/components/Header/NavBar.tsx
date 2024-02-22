@@ -9,6 +9,7 @@ const NavBar = () => {
         {NAVBAR_LINKS.map(item => (
           <li key={item.value}>
             <Link
+              aria-label={`Go to the ${item.value} page`}
               className="text-black_1 text-16 font-medium transition-colors hover:text-grey_4"
               href={item.href}
             >

@@ -70,7 +70,7 @@ const RoomsSwiper = () => {
                     <Typo type="defaultP">{item.description}</Typo>
                   </div>
                   <div className="sm:mb-24 mb-[0px] sm:p-[12px] p-10 bg-[#7F4E25B2] rounded-[6px]">
-                    <Link href="/shop">
+                    <Link href="/shop" aria-label="shop-page">
                       <Icon icon="arrow" size={24} />
                     </Link>
                   </div>

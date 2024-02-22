@@ -32,7 +32,11 @@ const HeaderMenu = ({ isOpen, closeMenu, session }: HeaderMenuProps) => {
       <ul className="flex flex-col gap-32px pt-22">
         {NAVBAR_LINKS.map(item => (
           <li key={item.value}>
-            <Link onClick={() => closeMenu()} href={`${item.href}`}>
+            <Link
+              onClick={() => closeMenu()}
+              href={`${item.href}`}
+              aria-label={`Go to the ${item.value} page`}
+            >
               <h3 className="text-black_1 text-24 uppercase font-semibold leading-6">
                 {item.value}
               </h3>

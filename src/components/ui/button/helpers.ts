@@ -6,7 +6,7 @@ export const buttonStyles = {
   smallButton:
     "border-black_1 border-[1px] rounded-[50px] py-6 px-30 font-normal text-12 leading-normal duration-700 hover:duration-700 hover:bg-black_1 hover:text-white",
   largeButton:
-    "border-brown_1 border-[1px] text-white font-normal text-18 text-white bg-brown_1 px-40 py-14 rounded-md leading-normal duration-700 hover:duration-700 hover:bg-brown_2",
+    "border-brown_1 border-[1px] text-white font-normal text-18 text-white bg-brown_2 px-40 py-14 rounded-md leading-normal duration-700 hover:duration-700 hover:bg-brown_1",
   subscribeButton:
     "px-10 py-4 font-medium text-14 uppercase text-white bg-brown_2 leading-6 rounded-md duration-700 hover:duration-700 hover:bg-brown_1",
   disabledButton:

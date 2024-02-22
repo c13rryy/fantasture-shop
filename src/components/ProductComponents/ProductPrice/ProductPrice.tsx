@@ -13,7 +13,7 @@ const ProductPrice: FC<ProductPriceProps> = ({ price, discount, type }) => {
     <div className="flex flex-col gap-6px">
       <span
         className={classNames(
-          "text-grey_3 ",
+          "text-grey_4 ",
           {
             "line-through": discount,
           },
@@ -30,7 +30,7 @@ const ProductPrice: FC<ProductPriceProps> = ({ price, discount, type }) => {
       {discount && (
         <span
           className={classNames(
-            "text-grey_3 leading-7",
+            "text-grey_4 leading-7",
             {
               "text-20 font-semibold": type === "page",
             },

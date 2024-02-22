@@ -19,7 +19,7 @@ const FilterButton = ({ categoryName, href }: FilterButtonProps) => {
         categoryPage === categoryName ||
           (!categoryPage && categoryName === "All products")
           ? "text-black_1"
-          : "text-grey_4 "
+          : "text-grey_1"
       )}
       href={href ? href : `?page=1&category=${categoryName}`}
       scroll={false}
