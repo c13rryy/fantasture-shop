@@ -5,6 +5,7 @@ import Section from "@/components/ui/section/section";
 import { getAuthSession } from "@/lib/auth";
 import { hasSubscription } from "@/lib/utils";
 import { ProductData } from "@/types/db";
+import Link from "next/link";
 /* import Link from "next/link"; */
 
 interface ProductsProps {
@@ -40,11 +41,11 @@ const Products = async ({ data }: ProductsProps) => {
           })}
         </div>
         <div className="sm:mt-34 mt-26 flex justify-center">
-          {/* <Link href="/shop"> */}
-          <Button aria-label="show-more" size="large">
-            Show More
-          </Button>
-          {/* </Link> */}
+          <Link href="/shop">
+            <Button aria-label="show-more" size="large">
+              Show More
+            </Button>
+          </Link>
         </div>
       </MaxWidthWrapper>
     </Section>

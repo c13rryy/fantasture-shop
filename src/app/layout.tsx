@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Our shop",
     description: "Some information about shop",
+    images: [
+      {
+        url: "https://res.cloudinary.com/drckql7g9/image/upload/v1708117299/bbkkanxgti9ff8js5w1i.webp",
+        width: 300,
+        height: 300,
+      },
+    ],
     url: "https://fantasture-shop.vercel.app",
     type: "website",
     siteName: "Fantasture",
