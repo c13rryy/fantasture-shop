@@ -21,6 +21,7 @@ This is a [Fantasture-shop]([https://nextjs.org/](https://fantasture-shop.vercel
 - Search products
 - Subscribe to product
 - Cart
+- Payment
 - Filter products (server side pagination and scroll fetchig with useInfinitequery)
 - Comments and replies
 - Get in touch form
