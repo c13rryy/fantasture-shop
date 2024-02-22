@@ -12,6 +12,7 @@ This is a [Fantasture-shop]([https://nextjs.org/](https://fantasture-shop.vercel
 - zod (validation)
 - redis (To cache popular products)
 - resend (For get in touch form)
+- Stripe
 - axios
 - TanStack Query
 
